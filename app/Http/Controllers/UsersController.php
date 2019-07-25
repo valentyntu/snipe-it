@@ -616,7 +616,8 @@ class UsersController extends Controller
 
         if (isset($user->id)) {
             $this->authorize('view', $user);
-            return view('users/view', compact('user', 'userlog'));
+            return view('users/view', compact('user', 'userlog'))
+                ->with('settings', Setting::getSettings());
         }
     }
 
@@ -989,7 +990,7 @@ class UsersController extends Controller
         $licenses = $show_user->licenses()->get();
         $accessories = $show_user->accessories()->get();
         $consumables = $show_user->consumables()->get();
-        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user);
+        return view('users/print')->with('assets', $assets)->with('licenses',$licenses)->with('accessories', $accessories)->with('consumables', $consumables)->with('show_user', $show_user)->with('settings', Setting::getSettings());
 
     }
 
