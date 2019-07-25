@@ -55,7 +55,8 @@ class ViewAssetsController extends Controller
         $userlog = $user->userlog->load('item', 'user', 'target');
 
         if (isset($user->id)) {
-            return view('account/view-assets', compact('user', 'userlog'));
+            return view('account/view-assets', compact('user', 'userlog'))
+                ->with('settings', Setting::getSettings());
         } else {
             // Prepare the error message
             $error = trans('admin/users/message.user_not_found', compact('id'));
